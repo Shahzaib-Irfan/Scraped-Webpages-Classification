@@ -13,6 +13,7 @@ import sys
 import unittest
 import time
 import re
+import csv
 
 class Sel(unittest.TestCase):
     def setUp(self):
@@ -25,8 +26,8 @@ class Sel(unittest.TestCase):
     def test_sel(self):
         driver = self.driver
         delay = 3
-        url = "https://www.aliexpress.com/w/wholesale-health-and-fitness-equipment.html?g=y&SearchText=health+and+fitness+equipment"
-        for i in range(1, 15):
+        url = "https://www.aliexpress.com/w/wholesale-Food.html?g=y&SearchText=Food"
+        for i in range(1, 16):
             print(f"Page: {i}")
             driver.get(url)
 
@@ -41,11 +42,11 @@ class Sel(unittest.TestCase):
             soup = BeautifulSoup(html_source, 'html.parser')
             divs = soup.find_all('div', class_='list--gallery--C2f2tvm search-item-card-wrapper-gallery')
 
-            print(len(divs))
-
+            titles = []
             for div in divs:
                 title_div = div.find('div', class_='multi--content--11nFIBL').find('div', class_='multi--title--G7dOCj3').h3
                 title = title_div.text.strip() if title_div else "N/A"
+                titles.append(title)
 
                 items_sold_span = div.find('div', class_='multi--tradeContainer--3TqP9qf')
                 items_sold = items_sold_span.span.text.strip() if items_sold_span and items_sold_span.span else "N/A"
@@ -65,10 +66,16 @@ class Sel(unittest.TestCase):
                 store_info_span = div.find('span', class_='cards--store--3GyJcot')
                 store_info = store_info_span.text.strip() if store_info_span else "N/A"
 
-                print(title, items_sold, price, original_price, discount, shipping_info, store_info)
+                print(title)
                 print("----------")
 
-            url = f"https://www.aliexpress.com/w/wholesale-health-and-fitness-equipment.html?page={i + 1}&g=y&SearchText=health+and+fitness+equipment"
+            url = f"https://www.aliexpress.com/w/wholesale-Food.html?page={i + 1}&g=y&SearchText=Food"
+            complete_title = " ".join(titles)
+            
+            # Write to CSV
+            with open('Webpages.csv', mode='a', newline='', encoding='utf-8') as file:
+                writer = csv.writer(file)
+                writer.writerow([complete_title, "Food"])
 
     def tearDown(self):
         self.driver.quit()
