@@ -25,3 +25,13 @@ data = pd.read_csv('Webpages.csv')
 data = pd.concat([data.iloc[0: 12], data.iloc[15:27], data.iloc[30:42]])
 print(data)
 
+content_column = 0
+
+document_graphs = {}
+
+for index, row in data.iterrows():
+    content = row[content_column]
+    document_id = index 
+    
+    # Create graph for the content
+    document_graphs[document_id] = create_graph(content)
