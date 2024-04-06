@@ -13,3 +13,7 @@ def compute_mcs(G1, G2):
     mcs_graph = nx.Graph(list(common_edges))
     
     return mcs_graph
+
+def compute_distance(G1, G2):
+    mcs_graph = compute_mcs(G1, G2)
+    return -len(mcs_graph.edges()) 
