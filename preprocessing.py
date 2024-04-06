@@ -23,7 +23,6 @@ def create_graph(text):
 
 data = pd.read_csv('Webpages.csv')
 data = pd.concat([data.iloc[0: 12], data.iloc[15:27], data.iloc[30:42]])
-print(data)
 
 content_column = 0
 
