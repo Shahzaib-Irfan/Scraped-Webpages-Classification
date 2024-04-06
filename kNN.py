@@ -1,6 +1,8 @@
 from itertools import combinations
 from collections import Counter
 import networkx as nx
+from preprocessing import document_graphs, create_graph
+import pandas as pd
 
 # Function to compute the maximal common subgraph (MCS) between two graphs
 def compute_mcs(G1, G2):
@@ -41,3 +43,12 @@ def knn_classify(test_graph, k):
     majority_class = Counter(neighbor_categories).most_common(1)[0][0]
     
     return majority_class
+
+data = pd.read_csv('Webpages.csv')
+#data = pd.concat([data.iloc[12: 15], data.iloc[27:30], data.iloc[42: 44]])
+test_documents = [create_graph(str(data.iloc[42]['Content'])), create_graph(str(data.iloc[43]['Content'])), create_graph(str(data.iloc[44]['Content']))]
+
+# Classify test documents using kNN
+for test_graph in test_documents:
+    predicted_category = knn_classify(test_graph, k=3) # k = 3, because of three categories (Sports & Health, Sports and Food)
+    print("Predicted category:", predicted_category)
