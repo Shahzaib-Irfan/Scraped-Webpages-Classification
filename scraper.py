@@ -47,25 +47,6 @@ class Sel(unittest.TestCase):
                 title_div = div.find('div', class_='multi--content--11nFIBL').find('div', class_='multi--title--G7dOCj3').h3
                 title = title_div.text.strip() if title_div else "N/A"
                 titles.append(title)
-
-                items_sold_span = div.find('div', class_='multi--tradeContainer--3TqP9qf')
-                items_sold = items_sold_span.span.text.strip() if items_sold_span and items_sold_span.span else "N/A"
-
-                price_div = div.find('div', class_='multi--price-sale--U-S0jtj')
-                price = price_div.text.strip() if price_div else "N/A"
-
-                original_price_span = div.find('div', class_='multi--price-original--1zEQqOK')
-                original_price = original_price_span.span.text.strip() if original_price_span and original_price_span.span else "N/A"
-
-                discount_span = div.find('div', class_='multi--discount--3hksz5G')
-                discount = discount_span.text.strip() if discount_span else "N/A"
-
-                shipping_info_span = div.find('div', class_='multi--serviceContainer--3vRdzWN')
-                shipping_info = shipping_info_span.span.text.strip() if shipping_info_span and shipping_info_span.span else "N/A"
-
-                store_info_span = div.find('span', class_='cards--store--3GyJcot')
-                store_info = store_info_span.text.strip() if store_info_span else "N/A"
-
                 print(title)
                 print("----------")
 
