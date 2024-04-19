@@ -19,7 +19,6 @@ class Sel(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Firefox()
         self.driver.implicitly_wait(30)
-        self.base_url = "https://www.aliexpress.com"
         self.verificationErrors = []
         self.accept_next_alert = True
     
@@ -53,7 +52,6 @@ class Sel(unittest.TestCase):
             url = f"https://www.aliexpress.com/w/wholesale-Food.html?page={i + 1}&g=y&SearchText=Food"
             complete_title = " ".join(titles)
             
-            # Write to CSV
             with open('Webpages.csv', mode='a', newline='', encoding='utf-8') as file:
                 writer = csv.writer(file)
                 writer.writerow([complete_title, "Food"])
